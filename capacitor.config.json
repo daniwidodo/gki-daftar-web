@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "gki-daftar-web",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

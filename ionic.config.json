@@ -1,0 +1,7 @@
+{
+  "name": "gki-daftar-web",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

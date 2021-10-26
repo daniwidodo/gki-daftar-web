@@ -1,20 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" id="background">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <div id="container">
+        <h1>aplikasi registrasi ibadah</h1>
+        <h4>gki sulsel jemaat makassar</h4>
+        <div id="navigate-button">
+            <button mat-flat-button color="primary" id="basic" type="button" (click)="goToPernahDaftar()" mat-button style="margin-right: 30px;">
+        Pernah Daftar
+      </button>
+            <button mat-flat-button color="primary" id="basic" type="button" (click)="goToBelumDaftar()" mat-button>
+        Belum Daftar
+      </button>
+        </div>
+    </div>
 </ion-content>

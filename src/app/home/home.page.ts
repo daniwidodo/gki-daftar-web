@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor( private router: Router ) {}
+
+  klik() {
+    return console.log('klik');
+  }
+
+  goToPernahDaftar(){
+    this.router.navigate(['/pernah-daftar']);
+  }
+
+  goToBelumDaftar(){
+    this.router.navigate(['/belum-daftar']);
+  }
 
 }

@@ -1,0 +1,23 @@
+<ion-content>
+    <div id="container">
+        <div id="input">
+            <!-- Input with placeholder -->
+            <!-- each input post request to server confirm nik -->
+
+            <ion-input placeholder="Masukkan NIK">
+                <ion-icon name="alert-outline" style="color: orange;" slot="end"></ion-icon>
+                <ion-icon name="checkmark-outline" style="color: green;"></ion-icon>
+            </ion-input>
+
+
+
+        </div>
+        <button mat-flat-button color="primary" id="basic" type="button" (click)="authenticate(nik)" mat-button style="margin-right: 30px;">
+    Periksa NIK
+  </button>
+        <button mat-flat-button color="primary" id="basic" type="button" (click)="authenticate(nik)" mat-button>
+  Lanjutkan
+</button>
+    </div>
+
+</ion-content>

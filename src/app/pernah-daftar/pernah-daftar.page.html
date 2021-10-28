@@ -1,23 +1,26 @@
 <ion-content>
+    <div id="back-button">
+        <ion-button fill="outline" [routerLink]="['/home']">
+            <ion-icon slot="start" name="chevron-back-circle-outline"></ion-icon>
+            kembali
+        </ion-button>
+    </div>
+
     <div id="container">
         <div id="input">
             <!-- Input with placeholder -->
             <!-- each input post request to server confirm nik -->
 
-            <ion-input placeholder="Masukkan NIK">
-                <ion-icon name="alert-outline" style="color: orange;" slot="end"></ion-icon>
-                <ion-icon name="checkmark-outline" style="color: green;"></ion-icon>
+            <ion-input placeholder="Masukkan NIK" type="text" (ionChange)='getInput($event)'>
+                <ion-icon name="alert-outline" style="color: orange;" slot="end" *ngIf="showIcon === false"></ion-icon>
+                <ion-icon name="checkmark-outline" style="color: green;" *ngIf="showIcon === true"></ion-icon>
             </ion-input>
-
-
-
         </div>
-        <button mat-flat-button color="primary" id="basic" type="button" (click)="authenticate(nik)" mat-button style="margin-right: 30px;">
-    Periksa NIK
-  </button>
-        <button mat-flat-button color="primary" id="basic" type="button" (click)="authenticate(nik)" mat-button>
-  Lanjutkan
-</button>
+
+
+        <ion-button color="medium" *ngIf="showIcon === false"> Silahkan lengkapi data </ion-button>
+        <ion-button color="primary" *ngIf="showIcon === true" (click)="verifiedUser()"> Lanjutkan </ion-button>
     </div>
+
 
 </ion-content>

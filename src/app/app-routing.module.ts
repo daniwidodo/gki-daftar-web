@@ -24,8 +24,16 @@ const routes: Routes = [
     loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
-    path: 'daftar-ibadah-qr',
+    path: 'daftar-ibadah-qr/:id',
     loadChildren: () => import('./daftar-ibadah-qr/daftar-ibadah-qr.module').then( m => m.DaftarIbadahQrPageModule)
+  },
+  {
+    path: 'generated-qr/:userId/:ibadahId',
+    loadChildren: () => import('./generated-qr/generated-qr.module').then( m => m.GeneratedQrPageModule)
+  },
+  {
+    path: 'upload-photo',
+    loadChildren: () => import('./upload-photo/upload-photo.module').then( m => m.UploadPhotoPageModule)
   },
 ];
 

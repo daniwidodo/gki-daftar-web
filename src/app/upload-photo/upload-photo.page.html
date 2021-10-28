@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>uploadPhoto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <form [formGroup]="userForm">
+        <input type="file" (change)="onFileChange($event)" formControlName="files.kartuVaksin" />
+
+        <div formGroupName="data">
+            <input type="text" formControlName="namaLengkap" />
+        </div>
+
+
+    </form> -->
+
+
+    <div [formGroup]="userForm">
+        <input type="file" (change)="onFileChange($event)" />
+        <input type="text" formControlName="namaLengkap" />
+    </div>
+
+
+    <!-- <ion-button color="primary" expand="full" (click)="submitForm()">Upload</ion-button> -->
+    <ion-button color="primary" expand="full" (click)="cobaForm()">Upload</ion-button>
+    <ion-button color="primary" expand="full" (click)="jsonForm()">json</ion-button>
+</ion-content>

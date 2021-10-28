@@ -1,15 +1,32 @@
 <ion-content [fullscreen]="true" id="background">
-
     <div id="container">
-        <h1>aplikasi registrasi ibadah</h1>
-        <h4>gki sulsel jemaat makassar</h4>
+        <h1>Aplikasi Registrasi Ibadah</h1>
+        <h4>GKI SULSEL Jemaat Makassar</h4>
         <div id="navigate-button">
-            <button mat-flat-button color="primary" id="basic" type="button" (click)="goToPernahDaftar()" mat-button style="margin-right: 30px;">
+            <!-- <button
+        mat-flat-button
+        color="primary"
+        id="basic"
+        type="button"
+        (click)="goToPernahDaftar()"
+        mat-button
+        style="margin-right: 30px"
+      >
         Pernah Daftar
       </button>
-            <button mat-flat-button color="primary" id="basic" type="button" (click)="goToBelumDaftar()" mat-button>
+      <button
+        mat-flat-button
+        color="primary"
+        id="basic"
+        type="button"
+        (click)="goToBelumDaftar()"
+        mat-button
+      >
         Belum Daftar
-      </button>
+      </button> -->
+
+            <ion-button color="primary" (click)="goToPernahDaftar()"> Pernah Daftar </ion-button>
+            <ion-button color="primary" (click)="goToBelumDaftar()"> Belum Pernah Daftar </ion-button>
         </div>
     </div>
 </ion-content>

@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BelumDaftarPageRoutingModule } from './belum-daftar-routing.module';
+import { UploadPhotoPageRoutingModule } from './upload-photo-routing.module';
 
-import { BelumDaftarPage } from './belum-daftar.page';
+import { UploadPhotoPage } from './upload-photo.page';
 import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BelumDaftarPageRoutingModule,
+    UploadPhotoPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [BelumDaftarPage]
+  declarations: [UploadPhotoPage]
 })
-export class BelumDaftarPageModule {}
+export class UploadPhotoPageModule {}

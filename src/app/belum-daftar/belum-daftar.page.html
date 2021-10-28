@@ -1,9 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>belumDaftar</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+    <div id="back-button">
+        <ion-button fill="outline" [routerLink]="['/home']">
+            <ion-icon slot="start" name="chevron-back-circle-outline"></ion-icon>
+            kembali
+        </ion-button>
+    </div>
+    <div id="register-form">
+        <h1>
+            Registrasi
+        </h1>
+        <form action="" [formGroup]="userForm" (ngSubmit)="registrasi()">
+            <ion-label id="label">NIK</ion-label>
+            <ion-input id="input" placeholder="Masukkan Nomor NIK anda" formControlName="nik"></ion-input>
+            <ion-label id="label">Nama Lengkap</ion-label>
+            <ion-input id="input" placeholder="Contoh : Dani Widodo" formControlName="namaLengkap"></ion-input>
+            <ion-label id="label">Nomor Whatsapp</ion-label>
+            <ion-input id="input" placeholder="Contoh : 081234567890" formControlName="nomorWhatsapp"></ion-input>
+            <ion-label id="label">Tanggal Lahir</ion-label>
+            <ion-datetime id="input" displayFormat="MMMM/DD/YYYY" min="1930-03-14" max="2023-12-09" display-timezone="utc" formControlName="tanggalLahir" (ionChange)='getTanggalLahir($event)'></ion-datetime>
+            <input type="file" (change)="onFileChange($event)" />
+        </form>
+        <ion-button color="primary" (click)="registrasi()" style="margin-top: 20px;" *ngIf=" showRegisterButton === false"> Daftar </ion-button>
+        <h4 *ngIf=" showRegisterButton === true" style="color: red;">Maaf anda belum bisa mendaftar karena umur anda {{this.dob}} tahun</h4>
+    </div>
+    <!-- <ion-button color="primary" (click)="calculate($event)" style="margin-top: 20px;"> kalku </ion-button> -->
+
 
 </ion-content>

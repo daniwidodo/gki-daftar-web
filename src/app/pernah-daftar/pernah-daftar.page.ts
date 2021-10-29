@@ -45,7 +45,7 @@ export class PernahDaftarPage implements OnInit {
 
   verifiedUser() {
     console.log('user terverifikasi!');
-    this.router.navigate(['/daftar-ibadah-qr', this.userId]);
+    this.router.navigate(['/daftar-ibadah-qr', this.userId[0].nik]);
   }
 
   getInput(event: any) {
@@ -57,7 +57,7 @@ export class PernahDaftarPage implements OnInit {
       )
       .subscribe((response) => {
         this.nik = response;
-        this.userId = response[0].nik;
+        this.userId = response;
         console.log(response);
         console.log(this.userId);
         if (this.nik.length === 0) {

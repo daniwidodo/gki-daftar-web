@@ -8,10 +8,11 @@ import { GeneratedQrPageRoutingModule } from './generated-qr-routing.module';
 
 import { GeneratedQrPage } from './generated-qr.page';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-
+import {NgxPrintModule} from 'ngx-print';
 
 @NgModule({
   imports: [
+    NgxPrintModule,
     CommonModule,
     FormsModule,
     IonicModule,

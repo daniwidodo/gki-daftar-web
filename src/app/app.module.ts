@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
+import {NgxPrintModule} from 'ngx-print';
 
 ///////
 @NgModule({
@@ -20,6 +22,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    NgxPrintModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -32,6 +35,7 @@ import { environment } from '../environments/environment';
     })
   ],
   providers: [
+    Printer,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,

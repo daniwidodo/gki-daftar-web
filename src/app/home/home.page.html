@@ -1,23 +1,89 @@
 <ion-content [fullscreen]="true" id="background">
     <div id="container">
         <h1>Aplikasi Registrasi Ibadah</h1>
-        <h4>GKI SULSEL Jemaat Makassar</h4>
-        <div id="navigate-button">
-            <ion-button color="primary" (click)="goToPernahDaftar()">
-                Pernah Daftar
-            </ion-button>
-            <ion-button color="primary" (click)="goToBelumDaftar()">
-                Belum Pernah Daftar
-            </ion-button>
+        <!-- <h4>GKI SULSEL Jemaat Makassar</h4> -->
+
+
+        <!-- <ion-list>
+            <ion-item>
+
+                <ion-checkbox slot="start"></ion-checkbox>
+                <ion-label>aaaa</ion-label>
+            </ion-item>
+        </ion-list> -->
+
+        <div>
+            <h4>SYARAT & KETENTUAN</h4>
+            <p>
+                Pastikan Anda membaca terlebih dahulu "Syarat & Ketentuan" dibawah ini dan harap mengisi data dengan benar dan jujur. (Data yang diinput akan dijaga kerahasiaannya)
+            </p>
+
+            <ol>
+                <li>Berusia diatas 12 tahun hingga 60 tahun.</li>
+                <li>
+                    Tidak melakukan kontak / interaksi fisik dengan orang yang terinfeksi COVID-19 dalam 2 (dua) minggu terakhir.
+                </li>
+                <li>
+                    Tidak berada dalam keadaan terinfeksi COVID-19 atau sedang menjalani isolasi mandiri.
+                </li>
+                <li>
+                    Dalam keadaan sehat dan tidak mengalami gejala berikut ini :
+                    <ul>
+                        <li>Demam (suhu badan diatas 37,5 °C)</li>
+                        <li>Sakit Kepala</li>
+                        <li>Sakit tenggorokan / batuk / pilek</li>
+                        <li>Kesulitan bernafas</li>
+                        <li>Kesulitan mencium bau / mengecap rasa</li>
+                        <li>
+                            Mual / Diare yang disertai salah satu atau beberapa gejala diatas
+                        </li>
+                    </ul>
+                </li>
+                <li>Sudah menerima vaksin minimal 1 (satu) kali.</li>
+                <li>1 registrasi maksimal untuk 1 orang</li>
+                <li>
+                    QR Code hanya dapat digunakan sekali, yakni sesuai tanggal registrasi dan tidak dapat dipindahtangankan / dititipkan.
+                </li>
+                <li>
+                    Seluruh jemaat wajib menggunakan Masker dan mematuhi protokol kesehatan yang ditetapkan (5M).
+                </li>
+            </ol>
+
+            <!-- <h1 *ngIf="checkbox1 === true && checkbox2 === true">
+                <strong>wuhuu</strong>
+            </h1> -->
+
+            <!--  -->
+            <ion-list>
+                <ion-item>
+                    <ion-checkbox slot="start" (ionChange)="checkbox1Click($event)"></ion-checkbox>
+                    <p>Saya menyetujui dan memenuhi seluruh Syarat dan Ketentuan diatas.</p>
+                </ion-item>
+                <ion-item>
+                    <ion-checkbox slot="start" (ionChange)="checkbox2Click($event)"></ion-checkbox>
+                    <p>Saya memahami bahwa pendaftaran ini tidak menjamin keikutsertaan dalam Ibadah Onsite apabila ditemukan ketidaksesuaian terhadap Syarat dan Ketentuan diatas pada saat verifikasi di tempat.</p>
+                </ion-item>
+            </ion-list>
+
+            <div id="navigate-button" *ngIf="checkbox1 === false || checkbox2 === false">
+                <ion-button color="light">
+                    Pernah Daftar
+                </ion-button>
+                <ion-button color="light">
+                    Belum Pernah Daftar
+                </ion-button>
+            </div>
+
+            <div id="navigate-button" *ngIf="checkbox1 === true || checkbox2 === true">
+                <ion-button color="primary" (click)="goToPernahDaftar()">
+                    Pernah Daftar
+                </ion-button>
+                <ion-button color="primary" (click)="goToBelumDaftar()">
+                    Belum Pernah Daftar
+                </ion-button>
+            </div>
+
+
         </div>
-        <ion-checkbox></ion-checkbox>
-        <p>
-            SYARAT & KETENTUAN Pastikan Anda membaca terlebih dahulu "Syarat & Ketentuan" dibawah ini dan harap mengisi data dengan benar dan jujur. (Data yang diinput akan dijaga kerahasiaannya) 1. Berusia diatas 12 tahun hingga 60 tahun. 2. Tidak melakukan kontak
-            / interaksi fisik dengan orang yang terinfeksi COVID-19 dalam 2 (dua) minggu terakhir. 3. Tidak berada dalam keadaan terinfeksi COVID-19 atau sedang menjalani isolasi mandiri. 4. Dalam keadaan sehat dan tidak mengalami gejala berikut ini :
-            * Demam (suhu badan diatas 37,5 °C) * Sakit Kepala * Sakit tenggorokan / batuk / pilek * Kesulitan bernafas * Kesulitan mencium bau / mengecap rasa * Mual / Diare yang disertai salah satu atau beberapa gejala diatas 5. Sudah menerima vaksin
-            minimal 1 (satu) kali. 6. 1 registrasi maksimal untuk 1 orang 7. QR Code hanya dapat digunakan sekali, yakni sesuai tanggal registrasi dan tidak dapat dipindahtangankan / dititipkan. 8. Seluruh jemaat wajib menggunakan Masker dan mematuhi
-            protokol kesehatan yang ditetapkan (5M). □ Saya menyetujui dan memenuhi seluruh Syarat dan Ketentuan diatas. □ Saya memahami bahwa pendaftaran ini tidak menjamin keikutsertaan dalam Ibadah Onsite apabila ditemukan ketidaksesuaian terhadap
-            Syarat dan Ketentuan diatas pada saat verifikasi di tempat.
-        </p>
     </div>
 </ion-content>

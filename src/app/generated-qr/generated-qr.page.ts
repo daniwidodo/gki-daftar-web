@@ -3,6 +3,7 @@ import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiedi
 import { Router,NavigationEnd  } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ServerStrapiService } from '../services/server-strapi.service';
+import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
 
 @Component({
   selector: 'app-generated-qr',
@@ -11,17 +12,22 @@ import { ServerStrapiService } from '../services/server-strapi.service';
 })
 export class GeneratedQrPage implements OnInit {
 
+  name = 'Angular PDF';
+
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   value: string;
 
-  constructor( private router: Router, private http: HttpClient, private server: ServerStrapiService) { 
+  constructor( private router: Router, private http: HttpClient, private server: ServerStrapiService, private printer: Printer) {
     console.log(router.url);
-    
-    this.value = this.server.endpoint + router.url
+
+    this.value = this.server.endpoint + router.url;
+
+
   }
 
   ngOnInit() {
   }
+
 
 }

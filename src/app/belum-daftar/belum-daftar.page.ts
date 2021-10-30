@@ -61,7 +61,7 @@ export class BelumDaftarPage implements OnInit {
     formData.append('data', userData);
     formData.append('files.kartuVaksin', this.file, this.file.name);
     this.httpClient
-      .post('http://localhost:1337/data-jemaats', formData)
+      .post(this.server.endpoint+'/data-jemaats', formData)
       .subscribe(
         (response) => {
           console.log(response);

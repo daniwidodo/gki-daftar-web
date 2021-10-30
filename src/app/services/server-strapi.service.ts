@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class ServerStrapiService {
 
-  endpoint = 'http://localhost:1337';
+  endpoint = 'https://panel-regi-gki.herokuapp.com';
   constructor( private httpClient: HttpClient) { }
 
   registerUser() {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServerStrapiService } from '../services/server-strapi.service';
 import * as moment from 'moment';
@@ -39,8 +39,8 @@ export class BelumDaftarPage implements OnInit {
     //private camera: Camera
   ) {
     this.userForm = this.formBuilder.group({
-      nik: [''],
-      namaLengkap: [''],
+      nik: ['', [Validators.required]],
+      namaLengkap: ['', [Validators.required]],
       nomorWhatsapp: [''],
       tanggalLahir: [''],
       alamatDomisili: [''],
@@ -66,7 +66,7 @@ export class BelumDaftarPage implements OnInit {
         (response) => {
           console.log(response);
           console.log('post success!');
-          this.router.navigate(['home']);
+          this.router.navigate(['pernah-daftar']);
         },
         (error) => {
           console.log(error);

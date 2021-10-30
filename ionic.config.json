@@ -1,7 +1,10 @@
 {
   "name": "gki-daftar-web",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
   },
   "type": "angular"
 }

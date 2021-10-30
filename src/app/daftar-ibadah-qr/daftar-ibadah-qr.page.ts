@@ -12,7 +12,8 @@ export class DaftarIbadahQrPage implements OnInit {
   ibadahs: any = [];
   userId: any;
   namaLengkap: any;
-  
+  sisaQuota: any;
+
   constructor(
     private server: ServerStrapiService,
     private activatedroute: ActivatedRoute,
@@ -33,7 +34,8 @@ export class DaftarIbadahQrPage implements OnInit {
     this.server.getAllIbadah().subscribe((response) => {
       console.log(response);
       this.ibadahs = response;
-      //this.ibadahId = response.id;
+      this.sisaQuota = response[0].quota -1 ;
+      console.log(this.sisaQuota );
     });
   }
 
@@ -48,6 +50,18 @@ export class DaftarIbadahQrPage implements OnInit {
 
   generateQrToNextPage(ibadahId) {
     console.log(this.userId, ibadahId);
+
+    // const updateQuota: FormData = new FormData();
+    // updateQuota.append('quota', this.sisaQuota);
+
+    // console.log(updateQuota);
+
+    this.httpClient.put( this.server.endpoint + '/ibadahs/' + ibadahId,  {
+      quota:  this.sisaQuota
+    })
+    .subscribe( (response) => {
+      console.log(response);
+    });
     this.router.navigate(['/generated-qr', this.userId, ibadahId]);
   }
 }

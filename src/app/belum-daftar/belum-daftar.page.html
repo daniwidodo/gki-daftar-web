@@ -9,9 +9,9 @@
         <h1>Registrasi</h1>
         <form action="" [formGroup]="userForm" (ngSubmit)="registrasi()">
             <ion-label id="label">NIK</ion-label>
-            <ion-input id="input" placeholder="Masukkan Nomor NIK anda" formControlName="nik"></ion-input>
+            <ion-input required id="input" placeholder="Masukkan Nomor NIK anda" formControlName="nik"></ion-input>
             <ion-label id="label">Nama Lengkap</ion-label>
-            <ion-input id="input" placeholder="Contoh : Dani Arthur" formControlName="namaLengkap"></ion-input>
+            <ion-input required="true" id="input" placeholder="Contoh : Dani Arthur" formControlName="namaLengkap"></ion-input>
             <ion-label id="label">Nomor Whatsapp</ion-label>
             <ion-input id="input" placeholder="Contoh : 081234567890" formControlName="nomorWhatsapp"></ion-input>
             <ion-label id="label">Alamat Domisili</ion-label>

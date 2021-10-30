@@ -31,6 +31,7 @@ export class BelumDaftarPage implements OnInit {
       namaLengkap: [''],
       nomorWhatsapp: [''],
       tanggalLahir: [''],
+      alamatDomisili: [''],
     });
   }
 

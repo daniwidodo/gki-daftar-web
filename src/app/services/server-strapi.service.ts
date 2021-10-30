@@ -24,7 +24,7 @@ export class ServerStrapiService {
   }
 
   getAllIbadah() {
-    return this.httpClient.get( this.endpoint + '/ibadahs')
+    return this.httpClient.get( this.endpoint + '/ibadahs' + '?_limit=1')
       .pipe(
         tap( _ => console.log('data dari ibadah : ', this.endpoint)),
         catchError(this.handleError('error handler'))

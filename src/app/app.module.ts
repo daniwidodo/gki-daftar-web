@@ -14,7 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
 import {NgxPrintModule} from 'ngx-print';
-
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 ///////
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +36,7 @@ import {NgxPrintModule} from 'ngx-print';
   ],
   providers: [
     Printer,
+    Camera,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy,

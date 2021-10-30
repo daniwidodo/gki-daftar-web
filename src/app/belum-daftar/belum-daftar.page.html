@@ -20,7 +20,8 @@
             <ion-datetime id="input" displayFormat="MMMM/DD/YYYY" min="1930-03-14" max="2023-12-09" value="2019-10-01T15:43:40.394Z" display-timezone="utc" formControlName="tanggalLahir" (ionChange)="getTanggalLahir($event)"></ion-datetime>
             <ion-label id="label">Masukkan Gambar Kartu Vaksin </ion-label> <br>
             <input id="input" type="file" (change)="onFileChange($event)" />
-            <ion-button color="primary"> Ambil foto </ion-button>
+            <!-- <ion-button color="primary" (click)="takeSnapshot()"> Ambil foto </ion-button> -->
+            <!-- https://edupala.com/how-capture-image-using-angular-camera/ -->
         </form>
         <ion-button color="primary" (click)="registrasi()" style="margin-top: 20px" *ngIf=" showRegisterButton === false">
             Daftar
@@ -29,5 +30,8 @@
             Maaf anda belum bisa mendaftar karena umur anda {{this.dob}} tahun
         </h4>
     </div>
+
+    <!--  -->
+    <!-- <webcam [height]="500" [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam" [switchCamera]="nextWebcamObservable"></webcam> -->
 
 </ion-content>

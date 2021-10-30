@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServerStrapiService } from '../services/server-strapi.service';
 import * as moment from 'moment';
-
+//import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Observable, Subject } from 'rxjs';
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 @Component({
   selector: 'app-belum-daftar',
   templateUrl: './belum-daftar.page.html',
@@ -20,11 +22,21 @@ export class BelumDaftarPage implements OnInit {
   dob: any;
   showRegisterButton = false;
 
+  showWebcam = true;
+  isCameraExist = true;
+
+  errors: WebcamInitError[] = [];
+
+  // webcam snapshot trigger
+  private trigger: Subject<void> = new Subject<void>();
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+
   constructor(
     private httpClient: HttpClient,
     private server: ServerStrapiService,
     public formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    //private camera: Camera
   ) {
     this.userForm = this.formBuilder.group({
       nik: [''],
@@ -81,4 +93,33 @@ export class BelumDaftarPage implements OnInit {
     this.file = event.target.files[0];
     console.log(this.file);
   }
+  takeSnapshot(): void {
+    this.trigger.next();
+  }
+
+  onOffWebCame() {
+    this.showWebcam = !this.showWebcam;
+  }
+
+  handleInitError(error: WebcamInitError) {
+    this.errors.push(error);
+  }
+
+  changeWebCame(directionOrDeviceId: boolean | string) {
+    this.nextWebcam.next(directionOrDeviceId);
+  }
+
+  handleImage(webcamImage: WebcamImage) {
+    //this.getPicture.emit(webcamImage);
+    this.showWebcam = false;
+  }
+
+  get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
+  get nextWebcamObservable(): Observable<boolean | string> {
+    return this.nextWebcam.asObservable();
+  }
+
 }

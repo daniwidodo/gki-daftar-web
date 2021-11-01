@@ -32,7 +32,7 @@ export class DaftarIbadahQrPage implements OnInit {
     private httpClient: HttpClient,
     private router: Router
   ) {
-    
+
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class DaftarIbadahQrPage implements OnInit {
 
   getIbadahFromServer() {
     this.server.getAllIbadah().subscribe((response) => {
-     
+
 
       this.ibadahs = response;
       this.sisaQuota = response[0].quota - 1;

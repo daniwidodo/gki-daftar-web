@@ -13,6 +13,18 @@ export class DaftarIbadahQrPage implements OnInit {
   userId: any;
   namaLengkap: any;
   sisaQuota: any;
+  userData: any;
+  getCurrentUserID: any;
+  sudahPilihIbadah: any;
+  allDataJemaats: any;
+  ibadahId: any;
+  nikId: any;
+  arrayDataJemaats: any = [];
+  jumlahRelasiDataJemaat: any;
+  totalSisaQuota: any;
+  kuotaHabis = false;
+  sudahIbadah: any;
+
 
   constructor(
     private server: ServerStrapiService,
@@ -23,19 +35,60 @@ export class DaftarIbadahQrPage implements OnInit {
 
   ngOnInit() {
     this.getIbadahFromServer();
+
     this.activatedroute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
-      console.log(this.userId);
-      this.getUser();
+      //console.log(this.userId);
     });
+
+    this.getUser();
+
+    //  if (this.sudahIbadah === true){
+    //     console.log('sudah ibadah');
+    //     // this.router.navigate(['/daftar-ibadah-qr']);
+    //   }
   }
 
   getIbadahFromServer() {
     this.server.getAllIbadah().subscribe((response) => {
-      console.log(response);
+      ////
+      this.arrayDataJemaats = response[0].data_jemaats;
+      this.sudahIbadah = this.arrayDataJemaats
+        .map((x) => x.id)
+        .includes(this.getCurrentUserID);
+      console.log('sudah ibadah: ', this.sudahIbadah);
+      ////
+
       this.ibadahs = response;
-      this.sisaQuota = response[0].quota -1 ;
-      console.log(this.sisaQuota );
+      this.sisaQuota = response[0].quota - 1;
+      this.ibadahId = response[0].id;
+      this.allDataJemaats = response[0].data_jemaats.concat({
+        id: this.getCurrentUserID
+      });
+      this.jumlahRelasiDataJemaat = response[0].data_jemaats.length;
+
+      ////
+      this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
+      console.log('totalSisaQuota:', this.totalSisaQuota);
+      if (this.totalSisaQuota <= 0) {
+        this.kuotaHabis = true;
+      } else {
+        this.kuotaHabis = false;
+      }
+      ////
+
+      // eslint-disable-next-line eqeqeq
+      if (this.sudahIbadah == true){
+        console.log('zzz');
+        this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
+      }
+
+      console.log('data lengkap ibadah :', response);
+      console.log(this.sisaQuota);
+      console.log('ibadah id :', this.ibadahId);
+      console.log('concat data jemaats :', this.allDataJemaats);
+      console.log('array data jemaats :', this.arrayDataJemaats);
+      console.log('jumlah relasi:', this.jumlahRelasiDataJemaat);
     });
   }
 
@@ -43,9 +96,25 @@ export class DaftarIbadahQrPage implements OnInit {
     this.httpClient
       .get(this.server.endpoint + '/data-jemaats' + '?nik=' + this.userId)
       .subscribe((response) => {
+        this.userData = response;
+        ////
         this.namaLengkap = response[0].namaLengkap;
-        console.log(response);
-      });
+        if (this.namaLengkap == null) {
+          console.log('xxx');
+        }
+
+        this.nikId = response[0].nik;
+        this.getCurrentUserID = response[0].id;
+        ////
+        console.log('data lengkap user:', this.userData);
+        console.log('data user id:', this.getCurrentUserID);
+        console.log('data sudah pilih ibadah:', this.sudahPilihIbadah);
+      }, error => {console.log(error); },
+      ( )=> { } ) ;
+  }
+
+  checkUserSudahPilihIbadah() {
+    //this.httpClient.get()
   }
 
   generateQrToNextPage(ibadahId) {
@@ -54,14 +123,14 @@ export class DaftarIbadahQrPage implements OnInit {
     // const updateQuota: FormData = new FormData();
     // updateQuota.append('quota', this.sisaQuota);
 
-    // console.log(updateQuota);
-
-    this.httpClient.put( this.server.endpoint + '/ibadahs/' + ibadahId,  {
-      quota:  this.sisaQuota
-    })
-    .subscribe( (response) => {
-      console.log(response);
-    });
-    this.router.navigate(['/generated-qr', this.userId, ibadahId]);
+    this.httpClient
+      .put(this.server.endpoint + '/ibadahs/' + ibadahId, {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        data_jemaats: this.allDataJemaats,
+      })
+      .subscribe((response) => {
+        console.log(response);
+      });
+    // this.router.navigate(['/generated-qr', this.userId, ibadahId]);
   }
 }

@@ -43,7 +43,7 @@ export class BelumDaftarPage implements OnInit {
       namaLengkap: ['', [Validators.required]],
       nomorWhatsapp: [''],
       tanggalLahir: [''],
-      alamatDomisili: [''],
+      alamatDomain: [''],
     });
   }
 

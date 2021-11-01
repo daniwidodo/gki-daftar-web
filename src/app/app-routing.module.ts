@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./daftar-ibadah-qr/daftar-ibadah-qr.module').then( m => m.DaftarIbadahQrPageModule)
   },
   {
-    path: 'generated-qr/:userId/:ibadahId',
+    path: 'generated-qr/:nikId/:ibadahId',
     loadChildren: () => import('./generated-qr/generated-qr.module').then( m => m.GeneratedQrPageModule)
   },
   {

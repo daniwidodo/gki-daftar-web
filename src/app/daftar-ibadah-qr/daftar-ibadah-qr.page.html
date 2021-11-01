@@ -13,7 +13,8 @@
             <ion-label>
                 <h2>{{ibadah.nama_ibadah}}</h2>
             </ion-label>
-            <p>sisa kuota <strong>{{ibadah.quota}}</strong></p>
+            <p *ngIf='!kuotaHabis'>sisa kuota <strong>{{totalSisaQuota}}</strong></p>
+            <p *ngIf='kuotaHabis'>maaf kuota habis</p>
         </div>
 
 

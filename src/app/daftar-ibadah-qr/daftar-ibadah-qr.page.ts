@@ -31,11 +31,13 @@ export class DaftarIbadahQrPage implements OnInit {
     private activatedroute: ActivatedRoute,
     private httpClient: HttpClient,
     private router: Router
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit() {
-    this.getIbadahFromServer();
 
+    this.getIbadahFromServer();
     this.activatedroute.paramMap.subscribe((params) => {
       this.userId = params.get('id');
       //console.log(this.userId);
@@ -51,13 +53,7 @@ export class DaftarIbadahQrPage implements OnInit {
 
   getIbadahFromServer() {
     this.server.getAllIbadah().subscribe((response) => {
-      ////
-      this.arrayDataJemaats = response[0].data_jemaats;
-      this.sudahIbadah = this.arrayDataJemaats
-        .map((x) => x.id)
-        .includes(this.getCurrentUserID);
-      console.log('sudah ibadah: ', this.sudahIbadah);
-      ////
+     
 
       this.ibadahs = response;
       this.sisaQuota = response[0].quota - 1;
@@ -67,6 +63,13 @@ export class DaftarIbadahQrPage implements OnInit {
       });
       this.jumlahRelasiDataJemaat = response[0].data_jemaats.length;
 
+       ////
+       this.arrayDataJemaats = response[0].data_jemaats;
+       this.sudahIbadah = this.arrayDataJemaats
+         .map((x) => x.id)
+         .includes(this.getCurrentUserID);
+       console.log('sudah ibadah: ', this.sudahIbadah);
+       ////
       ////
       this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
       console.log('totalSisaQuota:', this.totalSisaQuota);
@@ -130,7 +133,13 @@ export class DaftarIbadahQrPage implements OnInit {
       })
       .subscribe((response) => {
         console.log(response);
-      });
+        this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
+      },
+      error => { console.log(error);},
+      () => {
+
+      }
+      );
     // this.router.navigate(['/generated-qr', this.userId, ibadahId]);
   }
 }

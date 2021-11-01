@@ -1,0 +1,2 @@
+  // https://stackoverflow.com/questions/52145130/how-to-build-browser-version-in-ionic-4
+  // This works for me: ionic build --prod --public-url=/app/

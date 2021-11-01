@@ -21,7 +21,7 @@ export class GeneratedQrPage implements OnInit {
   name = 'Angular PDF';
   ibadahId: any;
   nikId: any;
-  baseUrl: string = window.location.host;
+  baseUrl: string = window.location.href;
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   value: string;

@@ -36,7 +36,7 @@ export class PernahDaftarPage implements OnInit {
     const inputValue = event.target.value;
     console.log(inputValue);
     this.httpClient
-      .get(this.server.endpoint + '/data-jemaats' + `?nik=`)
+      .get(this.server.endpoint + '/search' + `?nik=`)
       .subscribe((response) => {
         console.log(response);
       });
@@ -45,7 +45,7 @@ export class PernahDaftarPage implements OnInit {
 
   verifiedUser() {
     console.log('user terverifikasi!');
-    this.router.navigate(['/daftar-ibadah-qr', this.userId[0].nik]);
+    this.router.navigate(['/daftar-ibadah-qr', this.userId[0].id]);
   }
 
   getInput(event: any) {
@@ -53,7 +53,7 @@ export class PernahDaftarPage implements OnInit {
 
     this.httpClient
       .get(
-        this.server.endpoint + '/data-jemaats' + `?nik=` + event.target.value
+        this.server.endpoint + '/api/search/' + event.target.value
       )
       .subscribe((response) => {
         this.nik = response;

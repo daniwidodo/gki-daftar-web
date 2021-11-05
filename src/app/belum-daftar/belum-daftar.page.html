@@ -24,7 +24,8 @@
             <!-- https://edupala.com/how-capture-image-using-angular-camera/ -->
         </form>
         <ion-button color="primary" (click)="registrasi()" style="margin-top: 20px" *ngIf=" showRegisterButton === false">
-            Daftar
+            Lanjutkan
+            <ion-icon name="arrow-forward-outline"></ion-icon>
         </ion-button>
         <h4 *ngIf=" showRegisterButton === true" style="color: red">
             Maaf anda belum bisa mendaftar karena umur anda {{this.dob}} tahun

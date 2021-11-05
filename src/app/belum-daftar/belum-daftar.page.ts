@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,   } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServerStrapiService } from '../services/server-strapi.service';
 import * as moment from 'moment';
 //import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable, Subject } from 'rxjs';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+// import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 @Component({
   selector: 'app-belum-daftar',
   templateUrl: './belum-daftar.page.html',
@@ -25,25 +25,29 @@ export class BelumDaftarPage implements OnInit {
   showWebcam = true;
   isCameraExist = true;
 
-  errors: WebcamInitError[] = [];
+  // errors: WebcamInitError[] = [];
 
   // webcam snapshot trigger
-  private trigger: Subject<void> = new Subject<void>();
-  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+  // private trigger: Subject<void> = new Subject<void>();
+  // private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
   constructor(
     private httpClient: HttpClient,
     private server: ServerStrapiService,
     public formBuilder: FormBuilder,
     private router: Router,
+    // private formControl: FormControl
     //private camera: Camera
   ) {
     this.userForm = this.formBuilder.group({
-      nik: ['', [Validators.required]],
-      namaLengkap: ['', [Validators.required]],
+      nik: [''],
+      namaLengkap: [''],
       nomorWhatsapp: [''],
       tanggalLahir: [''],
       alamatDomain: [''],
+      // verifikasi:[0],
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      // ibadah_id:['null']
     });
   }
 
@@ -58,15 +62,21 @@ export class BelumDaftarPage implements OnInit {
 
     ///
     console.log(userData);
-    formData.append('data', userData);
-    formData.append('files.kartuVaksin', this.file, this.file.name);
+    formData.append('nik', this.userForm.get('nik').value);
+    formData.append('namaLengkap', this.userForm.get('namaLengkap').value);
+    formData.append('nomorWhatsapp', this.userForm.get('nomorWhatsapp').value);
+    formData.append('alamatDomain', this.userForm.get('alamatDomain').value);
+    formData.append('tanggalLahir', this.userForm.get('tanggalLahir').value);
+    formData.append('verifikasi', '0');
+    formData.append('ibadah_id', 'null');
+    formData.append('kartuVaksin', this.file, this.file.name);
     this.httpClient
-      .post(this.server.endpoint+'/data-jemaats', formData)
+      .post(this.server.endpoint+ '/api/jemaats', formData)
       .subscribe(
         (response) => {
           console.log(response);
           console.log('post success!');
-          this.router.navigate(['pernah-daftar']);
+          // this.router.navigate(['pernah-daftar']);
         },
         (error) => {
           console.log(error);
@@ -93,33 +103,35 @@ export class BelumDaftarPage implements OnInit {
     this.file = event.target.files[0];
     console.log(this.file);
   }
-  takeSnapshot(): void {
-    this.trigger.next();
-  }
 
-  onOffWebCame() {
-    this.showWebcam = !this.showWebcam;
-  }
 
-  handleInitError(error: WebcamInitError) {
-    this.errors.push(error);
-  }
+  // takeSnapshot(): void {
+  //   this.trigger.next();
+  // }
 
-  changeWebCame(directionOrDeviceId: boolean | string) {
-    this.nextWebcam.next(directionOrDeviceId);
-  }
+  // onOffWebCame() {
+  //   this.showWebcam = !this.showWebcam;
+  // }
 
-  handleImage(webcamImage: WebcamImage) {
-    //this.getPicture.emit(webcamImage);
-    this.showWebcam = false;
-  }
+  // handleInitError(error: WebcamInitError) {
+  //   this.errors.push(error);
+  // }
 
-  get triggerObservable(): Observable<void> {
-    return this.trigger.asObservable();
-  }
+  // changeWebCame(directionOrDeviceId: boolean | string) {
+  //   this.nextWebcam.next(directionOrDeviceId);
+  // }
 
-  get nextWebcamObservable(): Observable<boolean | string> {
-    return this.nextWebcam.asObservable();
-  }
+  // handleImage(webcamImage: WebcamImage) {
+  //   //this.getPicture.emit(webcamImage);
+  //   this.showWebcam = false;
+  // }
+
+  // get triggerObservable(): Observable<void> {
+  //   return this.trigger.asObservable();
+  // }
+
+  // get nextWebcamObservable(): Observable<boolean | string> {
+  //   return this.nextWebcam.asObservable();
+  // }
 
 }

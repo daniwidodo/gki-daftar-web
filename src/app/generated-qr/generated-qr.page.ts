@@ -44,7 +44,7 @@ export class GeneratedQrPage implements OnInit {
   }
 // https://www.c-sharpcorner.com/article/how-to-export-pdf-in-angular/
   ngOnInit() {
-    this.value = this.baseUrl + this.router.url;
+    this.value = this.baseUrl ;
     console.log(this.value);
   }
 }

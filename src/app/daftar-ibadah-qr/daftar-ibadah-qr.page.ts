@@ -110,13 +110,14 @@ export class DaftarIbadahQrPage implements OnInit {
 
     this.httpClient.put( this.server.endpoint + '/api/jemaats/' + this.userID , {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      
+
         // eslint-disable-next-line @typescript-eslint/naming-convention
         ibadah_id: ibadahId,
-    
+
     })
     .subscribe(  (response) => {
       console.log(response);
+      this.router.navigate(['/generated-qr', this.userID, ibadahId]);
     });
 
     // const updateQuota: FormData = new FormData();

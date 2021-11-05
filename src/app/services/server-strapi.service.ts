@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class ServerStrapiService {
 
-  endpoint = 'http://127.0.0.1:8000';
+  endpoint = 'https://panelv1.gkisulsel.org/public';
   constructor( private httpClient: HttpClient) { }
 
   registerUser() {

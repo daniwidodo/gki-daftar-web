@@ -76,7 +76,7 @@ export class BelumDaftarPage implements OnInit {
         (response) => {
           console.log(response);
           console.log('post success!');
-          // this.router.navigate(['pernah-daftar']);
+          this.router.navigate(['pernah-daftar']);
         },
         (error) => {
           console.log(error);

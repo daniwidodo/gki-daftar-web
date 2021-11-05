@@ -55,6 +55,8 @@ export class DaftarIbadahQrPage implements OnInit {
         this.ibadahs = response;
         this.dataIbadahs = this.ibadahs.data;
         this.sisaQuota = this.ibadahs.data[0].quota;
+        this.jumlahRelasiDataJemaat = this.ibadahs.data[0].jemaat.length;
+        this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
         ////
 
         // eslint-disable-next-line eqeqeq
@@ -106,24 +108,35 @@ export class DaftarIbadahQrPage implements OnInit {
   generateQrToNextPage(ibadahId) {
     console.log(this.userID, ibadahId);
 
+    this.httpClient.put( this.server.endpoint + '/api/jemaats/' + this.userID , {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        ibadah_id: ibadahId,
+    
+    })
+    .subscribe(  (response) => {
+      console.log(response);
+    });
+
     // const updateQuota: FormData = new FormData();
     // updateQuota.append('quota', this.sisaQuota);
 
-    this.httpClient
-      .put(this.server.endpoint + '/ibadahs/' + ibadahId, {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        data_jemaats: this.allDataJemaats,
-      })
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {}
-      );
+    // this.httpClient
+    //   .put(this.server.endpoint + '/ibadahs/' + ibadahId, {
+    //     // eslint-disable-next-line @typescript-eslint/naming-convention
+    //     data_jemaats: this.allDataJemaats,
+    //   })
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //       this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     },
+    //     () => {}
+    //   );
     // this.router.navigate(['/generated-qr', this.userId, ibadahId]);
   }
 }

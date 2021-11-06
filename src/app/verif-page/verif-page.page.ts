@@ -16,6 +16,8 @@ export class VerifPagePage implements OnInit {
   dataIbadah: any;
   arrayIdJemaat: any;
   hasilFilter: boolean;
+  namaJemaat: any;
+  namaIbadah: any;
 
   verified = false;
 
@@ -36,6 +38,8 @@ export class VerifPagePage implements OnInit {
       .subscribe(async (response) => {
         this.dataIbadah = response;
         this.dataJemaat = this.dataIbadah.data[0].jemaat;
+        this.namaIbadah = this.dataIbadah.data[0].namaIbadah;
+
         ////
 
         const loading = await this.loadingCtrl.create({
@@ -60,14 +64,28 @@ export class VerifPagePage implements OnInit {
         //////
 
         console.log(response);
+        console.log(this.namaIbadah);
         console.log('data ibadah :', this.dataIbadah);
         console.log('data ibadah :', this.dataJemaat);
         console.log('verified :', this.verified);
+
+        //////////////
+
+
       });
     });
   }
 
   ngOnInit() {
+
+    this.http.get( this.server.endpoint + '/api/jemaats/' + this.nikId)
+          .subscribe( (user) => {
+            console.log(user);
+            const userData: any = user;
+            this.namaJemaat = userData.data.namaLengkap;
+
+            console.log(userData);
+          });
 
   }
 }

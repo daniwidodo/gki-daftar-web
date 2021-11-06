@@ -19,7 +19,8 @@
             <ion-label id="label">Tanggal Lahir</ion-label>
             <ion-datetime id="input" displayFormat="MMMM/DD/YYYY" min="1930-03-14" max="2023-12-09" value="2019-10-01T15:43:40.394Z" display-timezone="utc" formControlName="tanggalLahir" (ionChange)="getTanggalLahir($event)"></ion-datetime>
             <ion-label id="label">Masukkan Gambar Kartu Vaksin </ion-label> <br>
-            <input id="input" type="file" (change)="onFileChange($event)" />
+            <input id="input" type="file" (change)="onFileChange($event)" placeholder="masukkan file dengan format jpg, jpeg atau png dengan ukuran max 1MB"/>
+            <p>masukkan file dengan format jpg, jpeg atau png dengan ukuran max 1MB </p>
             <!-- <ion-button color="primary" (click)="takeSnapshot()"> Ambil foto </ion-button> -->
             <!-- https://edupala.com/how-capture-image-using-angular-camera/ -->
         </form>

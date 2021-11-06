@@ -53,23 +53,35 @@ export class DaftarIbadahQrPage implements OnInit {
       .get(this.server.endpoint + '/api/ibadahs' )
       .subscribe( (response) => {
         this.ibadahs = response;
+        this.ibadahId = this.ibadahs.data[0].id;
         this.dataIbadahs = this.ibadahs.data;
         this.sisaQuota = this.ibadahs.data[0].quota;
         this.jumlahRelasiDataJemaat = this.ibadahs.data[0].jemaat.length;
         this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
         ////
+        if (this.totalSisaQuota <= 0) {
+          this.kuotaHabis = true;
+        } else {
+          this.kuotaHabis = false;
+        }
+
+                this.arrayDataJemaats = this.ibadahs.data[0].jemaat;
+        this.sudahIbadah = this.arrayDataJemaats
+          .map((x) => x.id)
+          .includes(this.getCurrentUserID);
+        console.log('sudah ibadah: ', this.sudahIbadah);
 
         // eslint-disable-next-line eqeqeq
-        // if (this.sudahIbadah == true) {
-        //   console.log('zzz');
-        //   this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
-        // }
+        if (this.sudahIbadah == true) {
+
+          this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
+        }
 
         console.log('<----------------->');
         console.log('response lengkap ibadah :', this.ibadahs);
         console.log('data ibadah :', this.dataIbadahs);
         console.log('quota', this.sisaQuota);
-        console.log('sisaQuota :');
+        console.log('totalSisaQuota:', this.totalSisaQuota);
         // console.log('ibadah id :', this.ibadahId);
         // console.log('concat data jemaats :', this.allDataJemaats);
         // console.log('array data jemaats :', this.arrayDataJemaats);

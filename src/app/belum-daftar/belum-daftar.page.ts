@@ -6,6 +6,7 @@ import { ServerStrapiService } from '../services/server-strapi.service';
 import * as moment from 'moment';
 //import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Observable, Subject } from 'rxjs';
+import { AlertController, ToastController } from '@ionic/angular';
 // import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 @Component({
   selector: 'app-belum-daftar',
@@ -36,6 +37,8 @@ export class BelumDaftarPage implements OnInit {
     private server: ServerStrapiService,
     public formBuilder: FormBuilder,
     private router: Router,
+    public alertController: AlertController,
+    private toast: ToastController
     // private formControl: FormControl
     //private camera: Camera
   ) {
@@ -48,20 +51,36 @@ export class BelumDaftarPage implements OnInit {
       // verifikasi:[0],
       // eslint-disable-next-line @typescript-eslint/naming-convention
       // ibadah_id:['null']
+
+
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+
+  }
 
   registrasi() {
     const formData: FormData = new FormData();
     console.log(this.file);
 
     ////
-    const userData = JSON.stringify(this.userForm.value);
+    // const userData = JSON.stringify(this.userForm.value);
 
     ///
-    console.log(userData);
+if (this.file === undefined){
+  console.log('error image');
+  this.toast.create({
+    message: 'kartu vaksin error',
+    duration: 2000,
+    color: 'danger',
+    position: 'top',
+  }).then((toastData) => {
+
+    toastData.present();
+  });
+}
     formData.append('nik', this.userForm.get('nik').value);
     formData.append('namaLengkap', this.userForm.get('namaLengkap').value);
     formData.append('nomorWhatsapp', this.userForm.get('nomorWhatsapp').value);
@@ -75,11 +94,32 @@ export class BelumDaftarPage implements OnInit {
       .subscribe(
         (response) => {
           console.log(response);
+          ////
+          this.toast.create({
+            message: 'pendaftaran sukses',
+            duration: 2000,
+            color: 'success',
+              position: 'top',
+          }).then((toastData) => {
+            console.log(toastData);
+            toastData.present();
+          });
           console.log('post success!');
+          //
           this.router.navigate(['pernah-daftar']);
         },
-        (error) => {
-          console.log(error);
+          error => {
+            const errorMessage = error.error.message;
+            this.toast.create({
+              message: errorMessage,
+              duration: 4000,
+              color: 'danger',
+              position: 'top',
+            }).then((toastData) => {
+
+              toastData.present();
+            });
+          console.log('pesan error :',error.error.message);
         }
       );
   }

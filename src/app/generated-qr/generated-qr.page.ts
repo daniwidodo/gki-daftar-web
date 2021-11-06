@@ -26,6 +26,8 @@ export class GeneratedQrPage implements OnInit {
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   value: string;
 
+  endPoint = 'http://gkisulsel.org/regibadah';
+
   constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
@@ -44,7 +46,9 @@ export class GeneratedQrPage implements OnInit {
   }
 // https://www.c-sharpcorner.com/article/how-to-export-pdf-in-angular/
   ngOnInit() {
-    this.value = this.baseUrl ;
+
+    const verifPage = this.endPoint + '/verif-page/' + this.nikId + '/' + this.ibadahId;
+    this.value = verifPage ;
     console.log(this.value);
   }
 }

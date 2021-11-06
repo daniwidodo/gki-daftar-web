@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'upload-photo',
     loadChildren: () => import('./upload-photo/upload-photo.module').then( m => m.UploadPhotoPageModule)
   },
+  {
+    path: 'verif-page/:nikId/:ibadahId',
+    loadChildren: () => import('./verif-page/verif-page.module').then( m => m.VerifPagePageModule)
+  },
 ];
 
 @NgModule({

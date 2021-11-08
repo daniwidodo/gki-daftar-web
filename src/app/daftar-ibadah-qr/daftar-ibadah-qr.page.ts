@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerStrapiService } from '../services/server-strapi.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-daftar-ibadah-qr',
@@ -25,6 +26,9 @@ export class DaftarIbadahQrPage implements OnInit {
   kuotaHabis = false;
   sudahIbadah: any;
   dataIbadahs: any;
+  totalQuota: any;
+  jemaatLength: any;
+  mapQuota: any;
 
   constructor(
     private server: ServerStrapiService,
@@ -53,11 +57,11 @@ export class DaftarIbadahQrPage implements OnInit {
       .subscribe((response) => {
         this.ibadahs = response;
         this.ibadahId = this.ibadahs.data[0].id;
-        this.dataIbadahs = this.ibadahs.data;
+        // this.dataIbadahs = this.ibadahs.data;
         this.sisaQuota = this.ibadahs.data[0].quota;
-        this.jumlahRelasiDataJemaat = this.ibadahs.data[0].jemaat.length;
-        this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
         ////
+
+        ///
         if (this.totalSisaQuota <= 0) {
           this.kuotaHabis = true;
         } else {
@@ -71,11 +75,12 @@ export class DaftarIbadahQrPage implements OnInit {
         console.log('sudah ibadah: ', this.sudahIbadah);
 
         // eslint-disable-next-line eqeqeq
-        if (this.sudahIbadah == true) {
-          this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
-        }
+        // if (this.sudahIbadah == true) {
+        //   this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
+        // }
 
         console.log('<----------------->');
+        console.log('total quota 2:', this.totalQuota);
         console.log('response lengkap ibadah :', this.ibadahs);
         console.log('data ibadah :', this.dataIbadahs);
         console.log('quota', this.sisaQuota);

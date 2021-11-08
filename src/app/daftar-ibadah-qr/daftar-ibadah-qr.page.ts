@@ -29,6 +29,8 @@ export class DaftarIbadahQrPage implements OnInit {
   totalQuota: any;
   jemaatLength: any;
   mapQuota: any;
+  namaIbadah: any;
+  jamIbadah: any;
 
   constructor(
     private server: ServerStrapiService,
@@ -55,11 +57,23 @@ export class DaftarIbadahQrPage implements OnInit {
     this.httpClient
       .get(this.server.endpoint + '/api/ibadahs')
       .subscribe((response) => {
-        this.ibadahs = response;
-        this.ibadahId = this.ibadahs.data[0].id;
-        // this.dataIbadahs = this.ibadahs.data;
-        this.sisaQuota = this.ibadahs.data[0].quota;
+        const ibadahs: any = response;
+        console.log(ibadahs);
+
+        this.dataIbadahs = ibadahs.data;
+        console.log(this.dataIbadahs);
+
+        const quota = this.dataIbadahs.quota;
+        this.ibadahId = this.dataIbadahs.id;
+        this.namaIbadah = this.dataIbadahs.namaIbadah;
+        this.jamIbadah = this.dataIbadahs.jam;
+
         ////
+        const jumlahRelasiDataJemaat = this.dataIbadahs.jemaat.length;
+        console.log('lenght jemaat :', jumlahRelasiDataJemaat);
+
+        this.sisaQuota = quota - jumlahRelasiDataJemaat;
+        console.log('sisa quota :', this.sisaQuota);
 
         ///
         if (this.totalSisaQuota <= 0) {
@@ -68,27 +82,18 @@ export class DaftarIbadahQrPage implements OnInit {
           this.kuotaHabis = false;
         }
 
-        this.arrayDataJemaats = this.ibadahs.data[0].jemaat;
+        this.arrayDataJemaats = this.dataIbadahs.jemaat;
         this.sudahIbadah = this.arrayDataJemaats
           .map((x) => x.id)
           .includes(this.getCurrentUserID);
         console.log('sudah ibadah: ', this.sudahIbadah);
 
-        // eslint-disable-next-line eqeqeq
-        // if (this.sudahIbadah == true) {
-        //   this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
-        // }
 
-        console.log('<----------------->');
-        console.log('total quota 2:', this.totalQuota);
-        console.log('response lengkap ibadah :', this.ibadahs);
-        console.log('data ibadah :', this.dataIbadahs);
-        console.log('quota', this.sisaQuota);
-        console.log('totalSisaQuota:', this.totalSisaQuota);
-        // console.log('ibadah id :', this.ibadahId);
-        // console.log('concat data jemaats :', this.allDataJemaats);
-        console.log('array data jemaats :', this.arrayDataJemaats);
-        // console.log('jumlah relasi:', this.jumlahRelasiDataJemaat);
+        if (this.sudahIbadah == true) {
+          this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
+        }
+
+
         console.log('<----------------->');
       });
   }

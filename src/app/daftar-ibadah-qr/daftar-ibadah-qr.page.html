@@ -9,24 +9,24 @@
         <h1>Selamat datang, {{namaLengkap}}</h1>
 
         <h3>Silahkan pilih ibadah </h3>
-        <div id="ibadah-card" *ngFor="let ibadah of dataIbadahs " style="background: blanchedalmond;"
-
+        <div id="ibadah-card"  style="background: blanchedalmond;"
+        (click)="generateQrToNextPage(ibadahId)"
         >
-        <!-- (click)="generateQrToNextPage(ibadah.id)" -->
+        <!-- (click)="generateQrToNextPage(ibadah.id)" *ngFor="let ibadah of dataIbadahs " -->
 
             <ion-label>
-                <!-- <h2>{{ibadah.namaIbadah}}</h2> -->
+                <h2>{{namaIbadah}}</h2>
             </ion-label>
-            <!-- <h4>Pukul : {{ibadah.jam}}</h4> -->
-            <!-- <p *ngIf='!kuotaHabis'>sisa kuota <strong>{{totalQuota}}</strong></p>
-            <p *ngIf='kuotaHabis'>maaf kuota habis</p> -->
+            <h4>Pukul : {{jamIbadah}}</h4>
+            <p *ngIf='!kuotaHabis'>sisa kuota <strong>{{sisaQuota}}</strong></p>
+            <p *ngIf='kuotaHabis'>maaf kuota habis</p>
 
 
 
         </div>
-        <div *ngFor="let quota of mapQuota">
-          <!-- {{quota.jemaat.length}} -->
-        </div>
+        <!-- <div *ngFor="let quota of mapQuota">
+          {{quota.jemaat.length}}
+        </div> -->
 
 
     </div>

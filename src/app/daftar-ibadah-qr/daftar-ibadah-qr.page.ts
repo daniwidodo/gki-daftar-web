@@ -54,6 +54,7 @@ export class DaftarIbadahQrPage implements OnInit {
   }
 
   getIbadahFromServer() {
+    console.log('<----------------->');
     this.httpClient
       .get(this.server.endpoint + '/api/ibadahs')
       .subscribe((response) => {
@@ -72,6 +73,8 @@ export class DaftarIbadahQrPage implements OnInit {
         const jumlahRelasiDataJemaat = this.dataIbadahs.jemaat.length;
         console.log('lenght jemaat :', jumlahRelasiDataJemaat);
 
+        ////
+
         this.sisaQuota = quota - jumlahRelasiDataJemaat;
         console.log('sisa quota :', this.sisaQuota);
 
@@ -87,14 +90,11 @@ export class DaftarIbadahQrPage implements OnInit {
           .map((x) => x.id)
           .includes(this.getCurrentUserID);
         console.log('sudah ibadah: ', this.sudahIbadah);
-
-
+        // eslint-disable-next-line eqeqeq
         if (this.sudahIbadah == true) {
           this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
         }
-
-
-        console.log('<----------------->');
+        ///////////
       });
   }
 
@@ -131,56 +131,11 @@ export class DaftarIbadahQrPage implements OnInit {
     this.httpClient
       .put(this.server.endpoint + '/api/jemaats/' + this.userID, {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         ibadah_id: ibadahId,
       })
       .subscribe((response) => {
         console.log(response);
         this.router.navigate(['/generated-qr', this.userID, ibadahId]);
       });
-
-    // const updateQuota: FormData = new FormData();
-    // updateQuota.append('quota', this.sisaQuota);
-
-    // this.httpClient
-    //   .put(this.server.endpoint + '/ibadahs/' + ibadahId, {
-    //     // eslint-disable-next-line @typescript-eslint/naming-convention
-    //     data_jemaats: this.allDataJemaats,
-    //   })
-    //   .subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //       this.router.navigate(['/generated-qr', this.nikId, this.ibadahId]);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     },
-    //     () => {}
-    //   );
-    // this.router.navigate(['/generated-qr', this.userId, ibadahId]);
   }
 }
-
-// this.sisaQuota = response[0].quota - 1;
-// this.ibadahId = response[0].id;
-// this.allDataJemaats = response[0].data_jemaats.concat({
-//   id: this.getCurrentUserID,
-// });
-// this.jumlahRelasiDataJemaat = response[0].data_jemaats.length;
-
-// ////
-// this.arrayDataJemaats = response[0].data_jemaats;
-// this.sudahIbadah = this.arrayDataJemaats
-//   .map((x) => x.id)
-//   .includes(this.getCurrentUserID);
-// console.log('sudah ibadah: ', this.sudahIbadah);
-// ////
-// ////
-// this.totalSisaQuota = this.sisaQuota - this.jumlahRelasiDataJemaat;
-// console.log('totalSisaQuota:', this.totalSisaQuota);
-// if (this.totalSisaQuota <= 0) {
-//   this.kuotaHabis = true;
-// } else {
-//   this.kuotaHabis = false;
-// }

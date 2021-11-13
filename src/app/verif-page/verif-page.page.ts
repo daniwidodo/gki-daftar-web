@@ -34,11 +34,13 @@ export class VerifPagePage implements OnInit {
       console.log('ibadah ID :', this.ibadahId);
       //////////////////////////
       this.http
-      .get(this.server.endpoint + '/api/ibadahs/' + this.ibadahId)
+      .get(this.server.endpoint + '/api/ibadahs/')
       .subscribe(async (response) => {
         this.dataIbadah = response;
-        this.dataJemaat = this.dataIbadah.data[0].jemaat;
-        this.namaIbadah = this.dataIbadah.data[0].namaIbadah;
+        console.log('response :', response);
+        this.dataJemaat = this.dataIbadah.data.jemaat;
+        console.log('data jemaat :', this.dataJemaat);
+        this.namaIbadah = this.dataIbadah.data.namaIbadah;
 
         ////
 

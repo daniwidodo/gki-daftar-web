@@ -1,0 +1,22 @@
+<ion-content>
+  <ngx-qrcode id="barcode" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value" cssClass="bshadow"></ngx-qrcode>
+
+  <!-- <textarea [(ngModel)]="value"></textarea> -->
+
+  <div id="notif">
+      <button class="button" printTitle="Cetak QR Ibadah" printSectionId="barcode" ngxPrint> Cetak </button>
+      <!-- <ion-button printTitle="Print Title" printSectionId="barcode" ngxPrint class=" button " color="primary "> Save Picture </ion-button> -->
+      <ol>
+          <li>
+              <p>
+                  QR Code pendaftaran ini tidak menjamin keikutsertaan dalam Ibadah Onsite apabila ditemukan ketidaksesuaian terhadap Syarat dan Ketentuan pendaftaran pada saat verifikasi di tempat.
+              </p>
+          </li>
+          <li>
+              <p>
+                  Seluruh jemaat wajib menggunakan masker selama beribadah dan mematuhi protokol kesehatan yang ditetapkan (5M).
+              </p>
+          </li>
+      </ol>
+  </div>
+</ion-content>

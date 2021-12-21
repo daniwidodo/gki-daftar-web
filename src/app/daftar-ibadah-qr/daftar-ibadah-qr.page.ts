@@ -32,6 +32,17 @@ export class DaftarIbadahQrPage implements OnInit {
   namaIbadah: any;
   jamIbadah: any;
 
+  sudahTerdaftar = false;
+  belumTerdaftar = false;
+
+  nameEvents: any;
+  responseEvents: any;
+  eventsId: any;
+  checkEventsMap = [];
+  quotaEvent: any;
+  totalQuotaEvent: any;
+  totalRelasiX: any;
+
   constructor(
     private server: ServerStrapiService,
     private activatedroute: ActivatedRoute,
@@ -51,6 +62,7 @@ export class DaftarIbadahQrPage implements OnInit {
     //     console.log('sudah ibadah');
     //     // this.router.navigate(['/daftar-ibadah-qr']);
     //   }
+    this.getEvents();
   }
 
   getIbadahFromServer() {
@@ -89,12 +101,17 @@ export class DaftarIbadahQrPage implements OnInit {
         this.sudahIbadah = this.arrayDataJemaats
           .map((x) => x.id)
           .includes(this.getCurrentUserID);
+
         console.log('sudah ibadah: ', this.sudahIbadah);
-        // eslint-disable-next-line eqeqeq
-        if (this.sudahIbadah == true) {
-          this.router.navigate(['/generated-qr', this.userID, this.ibadahId]);
+        if (this.sudahIbadah === true) {
+          this.sudahTerdaftar = true;
         }
-        ///////////
+
+        if (this.sudahIbadah === false) {
+          this.belumTerdaftar = true;
+        }
+
+        console.log('sudah terdaftar', this.sudahTerdaftar);
       });
   }
 
@@ -137,5 +154,59 @@ export class DaftarIbadahQrPage implements OnInit {
         console.log(response);
         this.router.navigate(['/generated-qr', this.userID, ibadahId]);
       });
+  }
+
+  getEvents() {
+    this.httpClient
+      .get(this.server.endpoint + '/api/events')
+      .subscribe((res: any) => {
+        this.responseEvents = res.data;
+
+        // quota
+        this.quotaEvent = this.responseEvents.map( x =>  x.quota);
+        const totalRelasiEvent = this.responseEvents.map( x => x.jemaats.length);
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+         this.totalRelasiX = this.quotaEvent.map(function(v, i){
+          return v - totalRelasiEvent[i];
+        });
+
+        console.log(this.quotaEvent);
+        console.log(this.totalRelasiX);
+
+
+
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        // const mapEvent = this.responseEvents.map((x) => x.jemaats);
+
+        // const forEvent = mapEvent.forEach((x) =>
+        //   // eslint-disable-next-line @typescript-eslint/no-shadow
+        //   x.map((x) => x.id).includes(this.getCurrentUserID)
+        // );
+
+
+
+      });
+  }
+
+  updateEvents() {}
+
+  generateQRevents(eventClickId, currentUserId) {
+    currentUserId = this.userID;
+
+    this.httpClient
+      .put(this.server.endpoint + '/api/events/' + eventClickId, {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        currentUserId,
+      })
+      .subscribe((response) => {
+        console.log(response);
+        this.router.navigate([
+          '/generated-qr-events',
+          this.userID,
+          eventClickId,
+        ]);
+      });
+    console.log(eventClickId, currentUserId);
   }
 }

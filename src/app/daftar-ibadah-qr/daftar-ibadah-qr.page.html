@@ -1,31 +1,52 @@
 <ion-content>
-    <div id="back-button">
-        <ion-button fill="outline" [routerLink]="['/pernah-daftar']">
-            <ion-icon slot="start" name="chevron-back-circle-outline"></ion-icon>
-            kembali
-        </ion-button>
-    </div>
-    <div id="container">
-        <h1>Selamat datang, {{namaLengkap}}</h1>
+  <div id="back-button">
+    <ion-button fill="outline" [routerLink]="['/pernah-daftar']">
+      <ion-icon slot="start" name="chevron-back-circle-outline"></ion-icon>
+      kembali
+    </ion-button>
+  </div>
+  <div id="container">
+    <h1>Selamat datang, {{namaLengkap}}</h1>
 
-        <h3>Silahkan pilih ibadah </h3>
-        <div id="ibadah-card"  style="background: blanchedalmond;"
-        (click)="generateQrToNextPage(ibadahId)"
-        >
-        <!-- (click)="generateQrToNextPage(ibadah.id)" *ngFor="let ibadah of dataIbadahs " -->
-
-            <ion-label>
-                <h2>{{namaIbadah}}</h2>
-            </ion-label>
-            <h4>Pukul : {{jamIbadah}}</h4>
-            <p *ngIf='!kuotaHabis'>sisa kuota <strong>{{sisaQuota}}</strong></p>
-            <p *ngIf='kuotaHabis'>maaf kuota habis</p>
+    <h3>Silahkan pilih ibadah</h3>
+    <div id="ibadah-card" (click)="generateQrToNextPage(ibadahId)">
+      <!-- (click)="generateQrToNextPage(ibadah.id)" *ngFor="let ibadah of dataIbadahs " -->
 
 
 
-        </div>
-
-
+      <div>
+        <ion-label>
+          <h2>{{namaIbadah}}</h2>
+        </ion-label>
+        <h4>Pukul : {{jamIbadah}}</h4>
+        <p *ngIf="!kuotaHabis">sisa kuota <strong>{{sisaQuota}}</strong></p>
+        <p *ngIf="kuotaHabis">maaf kuota habis</p>
+        <!-- <h2 *ngIf="sudahTerdaftar "> Sudah terdaftar </h2> -->
+        <!-- <h2 *ngIf="belumTerdaftar "> Belum terdaftar </h2> -->
+      </div>
     </div>
 
+    <div>
+      <div *ngFor=" let name of responseEvents " id="event-card">
+        <ion-label>
+          <div (click)="generateQRevents(name.id, nikId)">
+            <h2>{{name.title}}</h2>
+            <!-- <h4>Sisa quota : {{totalRelasiX}}</h4> -->
+            <h4>Pukul : {{name.description}}</h4>
+            <p>sisa quota event 1 : {{totalRelasiX[0]}}</p>
+            <p>sisa quota event 2 : {{totalRelasiX[1]}}</p>
+          </div>
+        </ion-label>
+
+        <!-- <h4>Pukul : {{jamIbadah}}</h4> -->
+        <!-- <p *ngIf='!kuotaHabis'>sisa kuota <strong>{{sisaQuota}}</strong></p> -->
+        <!-- <p *ngIf='kuotaHabis'>maaf kuota habis</p> -->
+        <!-- <h2 *ngIf="sudahTerdaftar "> Sudah terdaftar </h2> -->
+        <!-- <h2 *ngIf="belumTerdaftar "> Belum terdaftar </h2> -->
+      </div>
+
+
+    </div>
+
+  </div>
 </ion-content>

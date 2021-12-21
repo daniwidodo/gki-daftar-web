@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'verif-page/:nikId/:ibadahId',
     loadChildren: () => import('./verif-page/verif-page.module').then( m => m.VerifPagePageModule)
   },
+  {
+    path: 'verif-events',
+    loadChildren: () => import('./verif-events/verif-events.module').then( m => m.VerifEventsPageModule)
+  },
+  {
+    path: 'generated-qr-events/:nikId/:eventsId',
+    loadChildren: () => import('./generated-qr-events/generated-qr-events.module').then( m => m.GeneratedQrEventsPageModule)
+  },
 ];
 
 @NgModule({

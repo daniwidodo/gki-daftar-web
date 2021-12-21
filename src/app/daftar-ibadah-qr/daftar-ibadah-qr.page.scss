@@ -13,12 +13,21 @@
 }
 
 #ibadah-card {
-    border: lightseagreen solid 1px;
+    border: #2196f3 solid 3px;
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px;
-    height: 180px;
-    width: 300px;
+    height: 40vh;
+    width: 90vw;
+}
+
+#event-card {
+  border: green solid 3px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  height: 40vh;
+  width: 90vw;
 }
 
 #input {

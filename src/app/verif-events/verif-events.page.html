@@ -1,0 +1,13 @@
+<ion-content>
+  <div *ngIf="verified" style="margin-left: 20%; margin-top: 20%;">
+    <h1 style="color:lightgreen; " >Selamat!</h1>
+    <h4>anda terverifikasi</h4>
+    <h2><strong>{{namaJemaat}}</strong></h2>
+    <h2>di <strong>{{namaIbadah}}</strong></h2>
+  </div>
+
+  <div *ngIf="!verified" style="margin-left: 20%; margin-top: 20%;">
+    <h1 style="color: red; ">Maaf</h1>
+    <h4>anda belum terverifikasi</h4>
+  </div>
+</ion-content>

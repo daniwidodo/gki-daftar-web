@@ -11,10 +11,6 @@ export class ServerStrapiService {
   endpoint = 'https://panelv1.gkisulsel.org/public';
   constructor( private httpClient: HttpClient) { }
 
-  registerUser() {
-
-  }
-
   getSingleUser(){
     return this.httpClient.get( this.endpoint + '/data-jemaats' + '?nik=' )
       .pipe(
@@ -31,6 +27,11 @@ export class ServerStrapiService {
       );
   }
 
+  getEventsFromServer()
+  {
+    return this.httpClient.get( this.endpoint + '/events' );
+  };
+
 
   ///////////////
   private handleError<T>(operation = 'operation', result?: T) {
@@ -40,4 +41,6 @@ export class ServerStrapiService {
       return of(result as T);
     };
   }
+
+
 }

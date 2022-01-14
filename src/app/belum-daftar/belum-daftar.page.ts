@@ -129,9 +129,7 @@ if (this.file === undefined){
 
     this.dob = moment().diff(event.target.value, 'years', false);
 
-    if (this.dob > 60) {
-      this.showRegisterButton = true;
-    } else if (this.dob <= 12) {
+   if (this.dob <= 12) {
       this.showRegisterButton = true;
     } else {
       this.showRegisterButton = false;
